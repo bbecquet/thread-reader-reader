@@ -1,7 +1,7 @@
 {
   "name": "thread-reader-reader",
   "version": "0.0.1",
-  "description": "Util to convert Twitter thread to plain HTML markup, using the Thread Reader third-party app.",
+  "description": "Parse Twitter thread already simplified by third-party Thread Reader app, and produce dead simple HTML.",
   "main": "cli.js",
   "dependencies": {
     "jsdom": "^16.2.2",
@@ -13,5 +13,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benjamin Becquet (https://bbecquet.net)",
-  "license": "ISC"
+  "license": "WTFPL"
 }
