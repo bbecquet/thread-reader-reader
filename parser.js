@@ -19,7 +19,7 @@ function parseTweet(tweet) {
   const $tweet = queryDOM(tweet);
 
   const images = $tweet('.entity-image').map(getImageData);
-  const videosHTML = $tweet('.entity-video').map(getVideoData);
+  const videos = $tweet('.entity-video').map(getVideoData);
 
   // Clean stuff. /!\ Modify the original node.
   const ignoreSelector = ['.row', '.entity-image', '.entity-video', '.tw-permalink'].join(',');
@@ -30,7 +30,7 @@ function parseTweet(tweet) {
   });
   const tweetHTML = tweet.innerHTML; 
 
-  return { tweetHTML, images, videosHTML };
+  return { tweetHTML, images, videos };
 }
 
 function getTweets(threadReaderDoc) {

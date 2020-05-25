@@ -7,13 +7,13 @@ const [,, threadReaderUrl] = process.argv;
 
 function processDocument(document) {
   return getTweets(document)
-    .map(({ tweetHTML, videosHTML, images }) => {
+    .map(({ tweetHTML, videos, images }) => {
       const tags = [ `<p>${emojis.strip(tweetHTML)}</p>` ];
       if (images.length > 0) {
         tags.push(`<figure style="display:flex">${images.map(imageToHtml).join('')}</figure>`);
       }
-      if (videosHTML) {
-        tags.push(`<figure>${videosHTML.map(videoToHtml).join('')}</figure>`);
+      if (videos) {
+        tags.push(`<figure>${videos.map(videoToHtml).join('')}</figure>`);
       }
       return tags;
     })
