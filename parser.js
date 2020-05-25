@@ -4,11 +4,22 @@ const getImageData = img => ({
   url: queryDOM(img)('img')[0].getAttribute('data-src')
 });
 
+const getVideoData = video => {
+  const sources = queryDOM(video)('source');
+  return {
+    poster: queryDOM(video)('video')[0].getAttribute('poster'),
+    sources: sources.map(source => ({
+      src: source.getAttribute('src'),
+      type: source.getAttribute('type'),
+    }))
+  }
+};
+
 function parseTweet(tweet) {
   const $tweet = queryDOM(tweet);
 
   const images = $tweet('.entity-image').map(getImageData);
-  const videosHTML = $tweet('.entity-video').map(video => video.innerHTML);
+  const videosHTML = $tweet('.entity-video').map(getVideoData);
 
   // Clean stuff. /!\ Modify the original node.
   const ignoreSelector = ['.row', '.entity-image', '.entity-video', '.tw-permalink'].join(',');

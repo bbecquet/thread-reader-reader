@@ -13,7 +13,7 @@ function processDocument(document) {
         tags.push(`<figure style="display:flex">${images.map(imageToHtml).join('')}</figure>`);
       }
       if (videosHTML) {
-        tags.push(`<figure>${videosHTML.join('')}</figure>`);
+        tags.push(`<figure>${videosHTML.map(videoToHtml).join('')}</figure>`);
       }
       return tags;
     })
@@ -23,6 +23,14 @@ function processDocument(document) {
 
 const imageToHtml = ({ url }) => 
   `<a class="media-link" href="${url}"><img class="media" loading="lazy" src="${url}" alt="" /></a>`;
+
+const videoToHtml = ({ poster, sources }) => {
+  const types = sources.map(({ src, type }) => `<source src="${src}" type="${type}" />`);
+  return `<video controls="" poster="${poster}">
+    ${types.join('')}
+    <img alt="" src="${poster}" />
+  </video>`;
+}
 
 fetch(threadReaderUrl)
   .then(response => response.text())
