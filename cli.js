@@ -21,7 +21,7 @@ function processDocument(document, { extractResources = false, resourcesUrlPath 
           ${images.map(imageToHtml(urlTransformer)).join('')}
         </figure>`);
       }
-      if (videos) {
+      if (videos.length > 0) {
         if (extractResources) {
           videos.forEach(video => {
             resources.push(video.poster);
