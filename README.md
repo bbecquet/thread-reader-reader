@@ -7,7 +7,7 @@ Helps converting Twitter threads to stand-alone articles by extracting them to s
 1. Make sure you have Node and NPM installed.
 2. Install the command globally
    ```
-   npm i -g thread-reader-reader`
+   npm i -g thread-reader-reader
    ```
 
 ## Usage
@@ -38,7 +38,7 @@ In that case, the urls to images and videos will be rewritten with the same path
 You can change this relative url by specifying a third parameter.
 
 ```
-thread-reader-reader <thread_reader_url> [directory_to_store_files] [relative_urls_to_files]
+thread-reader-reader <thread_reader_url> [directory_to_store_files] [relative_url_path]
 ```
 
 That way, it's easy to adapt to how your destination website stores content.
@@ -53,8 +53,8 @@ thread-reader-reader https://threadreaderapp.com/thread/1241364682084093953.html
 
 Result:
 
- - The extracted thread HTML will be written to the `aquatint-article.html` file
- - In this HTML, urls to images and videos will use `/public/images/aquatint-files` as prefix
+ - The extracted thread HTML will be written to the `aquatint-article.html` file.
+ - In this HTML, urls to images and videos will use `/public/images/aquatint-files` as prefix.
  - Image and video files will be downloaded and stored in the `aquatint-files` directory, ready to be uploaded on your server, in the directory corresponding to `/public/images/aquatint-files`.
 
 

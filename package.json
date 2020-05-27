@@ -1,6 +1,6 @@
 {
   "name": "thread-reader-reader",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Parse Twitter thread already simplified by third-party Thread Reader app, and produce dead simple HTML.",
   "main": "cli.js",
   "bin": {
