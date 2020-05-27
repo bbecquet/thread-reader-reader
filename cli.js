@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fetch = require('node-fetch');
 const emojis = require('node-emoji');
 const getTweets = require('./parser').getTweets;

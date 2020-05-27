@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Parse Twitter thread already simplified by third-party Thread Reader app, and produce dead simple HTML.",
   "main": "cli.js",
+  "bin": {
+    "thread-reader-reader": "./cli.js"
+  },
   "dependencies": {
     "fs-extra": "^9.0.0",
     "jsdom": "^16.2.2",
