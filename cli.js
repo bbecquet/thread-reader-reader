@@ -12,24 +12,25 @@ function processDocument(document, { extractResources = false, resourcesUrlPath 
   const urlTransformer = extractResources ? rewriteUrl(resourcesUrlPath) : id;
   const html = getTweets(document)
     .map(({ tweetHTML, images, videos }) => {
-      const tags = [ `<p>${emojis.strip(tweetHTML)}</p>` ];
-      if (images.length > 0) {
+      const imagesHTML = images.map(img => {
         if (extractResources) {
-          images.forEach(img => resources.push(img.url));
+          resources.push(img.url);
         }
-        tags.push(`<figure style="display:flex">
-          ${images.map(imageToHtml(urlTransformer)).join('')}
-        </figure>`);
-      }
-      if (videos.length > 0) {
+        return imageToHtml(urlTransformer)(img);
+      });
+      const videosHTML = videos.map(video => {
         if (extractResources) {
-          videos.forEach(video => {
-            resources.push(video.poster);
-            video.sources.forEach(source => resources.push(source.src));
-          });
+          resources.push(video.poster);
+          video.sources.forEach(source => resources.push(source.src));
         }
-        tags.push(`<figure>${videos.map(videoToHtml(urlTransformer)).join('')}</figure>`);
-      }
+        return videoToHtml(urlTransformer)(video);
+      });
+      return { tweetHTML: emojis.strip(tweetHTML), imagesHTML, videosHTML };
+    })
+    .map(({ tweetHTML, imagesHTML, videosHTML }) => {
+      const tags = [ `<p>${tweetHTML}</p>` ];
+      if (imagesHTML.length > 0) { tags.push(`<figure style="display:flex">${imagesHTML.join('')}</figure>`); }
+      if (videosHTML.length > 0) { tags.push(`<figure>${videosHTML.join('')}</figure>`); }
       return tags;
     })
     .reduce((acc, tweetParts) => acc.concat(tweetParts), []) // alternative for missing .flat
