@@ -46,10 +46,9 @@ function download(url, destPath) {
 }
 
 function downloadResources(urls, localPath) {
-  return Promise.all(urls.map(async url => {
-    console.log(`Downloading ${url}…`);
-    return download(url, path.join(localPath, resourceBaseName(url)));
-  }));
+  return Promise.all(urls.map(async url =>
+    download(url, path.join(localPath, resourceBaseName(url)))
+  ));
 }
 
 const id = x => x;
@@ -72,7 +71,10 @@ const videoToHtml = urlTransformer => ({ poster, sources }) => {
 fetch(threadReaderUrl)
   .then(response => response.text())
   .then(html => new JSDOM(html).window.document)
-  .then(doc => processDocument(doc, { extractResources: rsrcDirPath, resourcesUrlPath: rsrcUrlPath || rsrcDirPath }))
+  .then(doc => processDocument(doc, {
+    extractResources: !!rsrcDirPath,
+    resourcesUrlPath: rsrcUrlPath || rsrcDirPath
+  }))
   .then(async ({ html, resources }) => {
     await downloadResources(resources, rsrcDirPath);
     return html;
