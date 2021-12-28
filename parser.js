@@ -34,7 +34,7 @@ function parseTweet(tweet) {
 }
 
 function getTweets(threadReaderDoc) {
-  return queryDOM(threadReaderDoc)('.t-main .content-tweet').map(parseTweet);
+  return queryDOM(threadReaderDoc)('.content-tweet').map(parseTweet);
 }
 
 if (typeof exports === 'object' && typeof module !== 'undefined') {
